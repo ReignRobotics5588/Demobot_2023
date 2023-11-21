@@ -35,16 +35,16 @@ public class DriveSubsystem extends SubsystemBase {
       new MecanumDrive(m_frontLeft, m_rearLeft, m_frontRight, m_rearRight);
 
   // The front-left-side drive encoder
-  private RelativeEncoder m_frontLeftEncoder = m_frontLeft.getEncoder();
+  private Encoder m_frontLeftEncoder = (Encoder)m_frontLeft.getEncoder();
 
   // The rear-left-side drive encoder
-  private final RelativeEncoder m_rearLeftEncoder = m_rearLeft.getEncoder();
+  private final Encoder m_rearLeftEncoder = (Encoder)m_rearLeft.getEncoder();
 
   // The front-right--side drive encoder
-  private final RelativeEncoder m_frontRightEncoder = m_frontRight.getEncoder();
+  private final Encoder m_frontRightEncoder = (Encoder)m_frontRight.getEncoder();
 
   // The rear-right-side drive encoder
-  private final Encoder m_rearRightEncoder = m_rearRight.getEncoder();
+  private final Encoder m_rearRightEncoder = (Encoder)m_rearRight.getEncoder();
 
   // The gyro sensor
   public AHRS m_gyro = new AHRS(SPI.Port.kMXP);
@@ -116,10 +116,10 @@ public class DriveSubsystem extends SubsystemBase {
 
   /** Resets the drive encoders to currently read a position of 0. */
   public void resetEncoders() {
-    m_frontLeftEncoder.setPosition(0.0);
-    m_rearLeftEncoder.setPosition(0.0);
-    m_frontRightEncoder.setPosition(0.0);
-    m_rearRightEncoder.setPosition(0.0);
+    m_frontLeftEncoder.reset();
+    m_rearLeftEncoder.reset();
+    m_frontRightEncoder.reset();
+    m_rearRightEncoder.reset();
   }
 
   /**
