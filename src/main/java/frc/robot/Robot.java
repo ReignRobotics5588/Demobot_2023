@@ -7,7 +7,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -15,10 +17,11 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
 
+  private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
 
+  AHRS m_ahrs = new AHRS(SPI.Port.kMXP);
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -28,6 +31,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    m_ahrs.reset();
   }
 
   /**
@@ -44,6 +48,9 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    SmartDashboard.putNumber("Yaw: ", (m_ahrs.getYaw() + 90) % 360); // spin
+    SmartDashboard.putNumber("Pitch: ", m_ahrs.getPitch()); // tilt forward/backwards
+    SmartDashboard.putNumber("Roll: ", m_ahrs.getRoll()); // 
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -84,6 +91,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    m_ahrs.reset();
   }
 
   /** This function is called periodically during operator control. */
