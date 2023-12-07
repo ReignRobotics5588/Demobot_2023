@@ -36,7 +36,7 @@ public final class Constants {
 
     public static final double kTrackWidth = 0.5;
     // Distance between centers of right and left wheels on robot
-    public static final double kWheelBase = 0.7;
+    public static final double kWheelBase = 0.54;
     // Distance between centers of front and back wheels on robot
 
     public static final MecanumDriveKinematics kDriveKinematics =
@@ -46,8 +46,8 @@ public final class Constants {
             new Translation2d(-kWheelBase / 2, kTrackWidth / 2),
             new Translation2d(-kWheelBase / 2, -kTrackWidth / 2));
 
-    public static final int kEncoderCPR = 1024;
-    public static final double kWheelDiameterMeters = 0.15;
+    public static final int kEncoderCPR = 42;
+    public static final double kWheelDiameterMeters = 0.1016;
     public static final double kEncoderDistancePerPulse =
         // Assumes the encoders are directly mounted on the wheel shafts
         (kWheelDiameterMeters * Math.PI) / (double) kEncoderCPR;
