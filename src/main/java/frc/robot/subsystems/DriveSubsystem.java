@@ -60,6 +60,7 @@ public class DriveSubsystem extends SubsystemBase {
     // gearbox is constructed, you might have to invert the left side instead.
     m_frontLeft.setInverted(true);
     m_rearLeft.setInverted(true);
+    m_frontRight.setInverted(false);
     
   }
 
